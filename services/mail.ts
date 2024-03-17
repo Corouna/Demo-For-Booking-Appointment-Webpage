@@ -4,6 +4,8 @@ interface EmailProps {
     to: string;
     subject: string;
     text: string;
+    html?: string;
+    icsContent?: string;
 }
 
 const transporter = nodemailer.createTransport({
@@ -14,12 +16,22 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const sendEmail = async ({ to, subject, text }: EmailProps) => {
+export const sendEmail = async ({ to, subject, text, html, icsContent }: EmailProps) => {
   const mailOptions = {
     from: process.env.EMAIL_USERNAME, 
     to, 
     subject, 
-    text, 
+    text,
+    html,
+    ...(icsContent && {
+      attachments: [
+        {
+          filename: 'appointment.ics',
+          content: icsContent,
+          contentType: 'text/calendar; charset="utf-8"; method=REQUEST',
+        },
+      ],
+    }),
   };
 
   try {
