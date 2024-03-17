@@ -175,7 +175,10 @@ const BookAppointmentForm: React.FC = () => {
                   onChange={(date: Date) => setSelectedDate(date)}
                   minDate={minDate}
                   maxDate={maxDate}
-                  filterDate={(date) => isWithinInterval(date, { start: startOfDay(minDate), end: maxDate })}
+                  filterDate={(date) => {
+                    const isWeekday = date.getDay() !== 0 && date.getDay() !== 6;
+                    return isWeekday && isWithinInterval(date, { start: startOfDay(minDate), end: maxDate });
+                  }}
                   dateFormat="MMMM d, yyyy"
                   wrapperClassName="w-full"
                   className="w-full px-3 py-2 bg-white shadow-sm border border-gray-300 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm" 
