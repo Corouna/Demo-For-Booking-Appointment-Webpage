@@ -1,0 +1,21 @@
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.formLabel {
+    margin-top: 20px;
+}
+
+.submitButton {
+    margin-top: 20px;
+}
+  
