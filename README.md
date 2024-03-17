@@ -79,12 +79,13 @@ The following are the assumptions made when developing the app
 - App does not require sign in. Anyone can make a booking without needing to login. Searching for own booking can be done using email or mobile number. 
 - Each appointment takes 30 minutes time. Therefore each time slot set in the app will be 30 minutes. Actual user may have longer process during the appointment time but this app assumes that user will spend 30 minutes to complete their appointment on that day. 
 - Appointment only requires minimum amount of data needed. For this app, aside from appointment date and time, user specific information needed are name, mobile number and email. 
+- User will need to select the branch that they want to go (which is based on the state selection) in order to proceed with the appointment booking. While this may increase the traffic on that branch if all users selected that same specific branch in their booking, but let us just assume here that any branches can hold sizeable amount of appointments at any given time within the operation hours. 
+- Assume that in case if the point above is not okay, then let us assume that there is a functionality by another system to handle the traffic in which the system will alter the user's booking (by changing the branch to the next nearest or changing to another time slot) to help mitigate the burden on any specific branch with high booking traffic.  
 - User is using real and actual name when creating appointment booking.
 - User is using real and actual mobile number when creating appointment booking. 
 - User is using real and actual email when creating appointment booking. 
 - Despite this project allowing same user to create multiple appointments into the system, but let us assume here that the user is a customer with modest behaviour, and will not spam the system with multiple unnecessary bookings. While it may sound like a problem, actual user usually may just create one appointment booking using their preferred email and mobile number and be done with it. 
 - Security wise, let us assume that this project is being hosted on a secured cloud platform, with secure practices being applied to it properly (rate limit, connectivity, data compliance and etc..)
 - Actual mail service provider is being used instead of using nodemailer (which is what being used in the project for emulating email sending). 
-- 
 
 
