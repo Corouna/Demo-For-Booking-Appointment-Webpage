@@ -90,6 +90,8 @@ const HomePage = (): JSX.Element => {
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mobile</th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">State</th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Branch</th>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
@@ -101,6 +103,8 @@ const HomePage = (): JSX.Element => {
                         <td className="p-2 font-small">{booking.name}</td>
                         <td className="p-2 font-small">{booking.email}</td>
                         <td className="p-2 font-small">{booking.mobile}</td>
+                        <td className="p-2 font-small">{booking.state}</td>
+                        <td className="p-2 font-small">{booking.branch}</td>
                         <td className="p-2 font-small">{booking.date}</td>
                         <td className="p-2 font-small">{booking.time}</td>
                         <td className="flex flex-row items-center justify-start space-x-2 md:space-x-4 p-2 font-small">

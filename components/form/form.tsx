@@ -3,12 +3,15 @@ import { useRouter } from 'next/router';
 import DatePicker from 'react-datepicker';
 import { format, addBusinessDays, isWithinInterval, addWeeks, startOfDay, parseISO } from 'date-fns';
 import { Appointment, Booking } from '@/data/interface';
+import { States, Branches, StateName } from '@/data/constant';
 
 const BookAppointmentForm: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [mobile, setMobile] = useState<string>('');
+  const [state, setState] = useState<StateName | ''>('');
+  const [branch, setBranch] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
   const minDate = addBusinessDays(new Date(), 2);
   const maxDate = addWeeks(new Date(), 3);
@@ -39,10 +42,18 @@ const BookAppointmentForm: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // manual validation on date picker only
+    if (!selectedDate) {
+      alert('Please select a date for your appointment.');
+      return;
+    }
+
     const appointment: Appointment = {
       name,
       email,
       mobile,
+      state,
+      branch,
       date: selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '',
       time: selectedTime,
     };
@@ -109,6 +120,8 @@ const BookAppointmentForm: React.FC = () => {
         setName(booking.name);
         setMobile(booking.mobile);
         setEmail(booking.email);
+        setState(booking.state as StateName);
+        setBranch(booking.branch)
         setSelectedDate(parseISO(booking.date));
         setSelectedTime(booking.time);
         setBookingId(id);
@@ -168,6 +181,39 @@ const BookAppointmentForm: React.FC = () => {
               />
             </div>
             <div>
+              <label htmlFor="time" className="block text-sm font-medium leading-5 text-gray-700">State</label>
+              <select
+                id="state"
+                required
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                className="w-full mt-1 px-3 py-2 bg-white shadow-sm border border-gray-300 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm"
+              >
+                <option value="">Select state</option>
+                {
+                  States.map((state, idx) => <option key={`${idx}_${state}`} value={state}>{state}</option>)
+                }
+              </select>
+            </div>
+            {
+              state && Branches[state as StateName] &&
+              <div>
+                <label htmlFor="time" className="block text-sm font-medium leading-5 text-gray-700">Branch</label>
+                <select
+                  id="branch"
+                  required
+                  value={branch}
+                  onChange={(e) => setBranch(e.target.value)}
+                  className="w-full mt-1 px-3 py-2 bg-white shadow-sm border border-gray-300 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm"
+                >
+                  <option value="">Select the branch you want to visit</option>
+                  {
+                    (Branches[state]).map((branch, idx) => <option key={`${idx}_${branch}`} value={branch}>{branch}</option>)
+                  }
+                </select>
+              </div>
+            }
+            <div>
               <label htmlFor="date" className="block text-sm font-medium leading-5 text-gray-700">Appointment Date</label>
               <div className="mt-1">
                 <DatePicker
@@ -183,12 +229,14 @@ const BookAppointmentForm: React.FC = () => {
                   wrapperClassName="w-full"
                   className="w-full px-3 py-2 bg-white shadow-sm border border-gray-300 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm" 
                 />
+                <input type="hidden" value={selectedDate ? selectedDate.toISOString() : ""} required />
               </div>
             </div>
             <div>
               <label htmlFor="time" className="block text-sm font-medium leading-5 text-gray-700">Appointment Time</label>
               <select
                 id="time"
+                required
                 value={selectedTime}
                 onChange={(e) => setSelectedTime(e.target.value)}
                 className="w-full mt-1 px-3 py-2 bg-white shadow-sm border border-gray-300 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm"

@@ -2,6 +2,8 @@ export interface Appointment {
     name: string;
     email: string;
     mobile: string;
+    state: string;
+    branch: string;
     date: string;
     time: string;
 }
@@ -11,6 +13,8 @@ export interface Booking {
     name: string;
     email: string;
     mobile: string;
+    state: string;
+    branch: string;
     date: string;
     time: string;
 }
