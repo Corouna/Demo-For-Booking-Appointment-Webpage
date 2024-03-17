@@ -4,7 +4,7 @@ This Appointment Booking App is a [Next.js](https://nextjs.org/) project bootstr
 
 ## Getting Started
 
-Firstly please create an environment file which will store the following values
+Firstly please create an environment file `.env.local` which will store the following values
 
 ```
 FIREBASE_API_KEY=
@@ -82,6 +82,9 @@ The following are the assumptions made when developing the app
 - User is using real and actual name when creating appointment booking.
 - User is using real and actual mobile number when creating appointment booking. 
 - User is using real and actual email when creating appointment booking. 
-- User can create unlimited booking. 
+- Despite this project allowing same user to create multiple appointments into the system, but let us assume here that the user is a customer with modest behaviour, and will not spam the system with multiple unnecessary bookings. While it may sound like a problem, actual user usually may just create one appointment booking using their preferred email and mobile number and be done with it. 
+- Security wise, let us assume that this project is being hosted on a secured cloud platform, with secure practices being applied to it properly (rate limit, connectivity, data compliance and etc..)
+- Actual mail service provider is being used instead of using nodemailer (which is what being used in the project for emulating email sending). 
+- 
 
 
